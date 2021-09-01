@@ -14,17 +14,10 @@ input.addEventListener('keypress', e => {
     if (invalidKey) e.preventDefault();
 });
 
-// FIXME: Fix these regex's
-// 2^3*-1 = -8
-// 4*(2+3-1) = 16
-// 2^3*5 = 40
-const PARENTHESIS_REGEX = /\((?<equation>[^\(\)]*)\)/;
-const EXPONENT_REGEX = /(?<operand1>\S+)\s*(?<operator>\^)\s*(?<operand2>\S+)/;
-const MULTIPLY_DIVIDE_REGEX = /(?<operand1>\S+)\s*(?<operator>[\*\/])\s*(?<operand2>\S+)/;
-const ADD_SUBTRACT_REGEX = /(?<operand1>\S+)\s*(?<operator>(?<!e)[\+\-])\s*(?<operand2>\S+)/;
-
-// const hasParenthesis = new RegExp(/\([()^*/+\-.\d]+\)/g).test(equation);
-// console.log(hasParenthesis)
+const PARENTHESIS_REGEX = /\((?<equation>[\^\*\/\+\-\.\d\se]*)\)/;
+const EXPONENT_REGEX = /(?<operand1>\-?[\d\.]+(e(\+|\-)\d+)?)\s*(?<operator>\^)\s*(?<operand2>\-?[\d\.]+(e(\+|\-)\d+)?)/;
+const MULTIPLY_DIVIDE_REGEX = /(?<operand1>\-?[\d\.]+(e(\+|\-)\d+)?)\s*(?<operator>[\*\/])\s*(?<operand2>\-?[\d\.]+(e(\+|\-)\d+)?)/;
+const ADD_SUBTRACT_REGEX = /(?<operand1>\-?[\d\.]+(e(\+|\-)\d+)?)\s*(?<operator>(?<!e)[\+\-])\s*(?<operand2>\-?[\d\.]+(e(\+|\-)\d+)?)/;
 
 function parseEquation(equation) {
     // Parenthesis

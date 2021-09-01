@@ -62,7 +62,8 @@ function handleOperation({ operand1, operand2, operator }) {
 
     switch (operator) {
         case '^':
-            return number1 ** number2;
+            const result = number1 ** number2;
+            return (number1 > 0) ? result : result * -1;
         case '*':
             return number1 * number2;
         case '/':
